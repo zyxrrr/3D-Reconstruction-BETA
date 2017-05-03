@@ -17,37 +17,41 @@ src.ExposureMode = 'manual';
 src.Exposure = -7;
 
 % Determine the device specific frame rates (frames per second) available.
-frameRates = set(src, 'FrameRate')
+frameRates = set(src, 'FrameRate');
 
 % Configure the device's frame rate to the highest available setting.
 src.FrameRate = frameRates{1};
 actualRate = str2num( frameRates{1} )
+preview(vidobj);
 
-com3=serial('COM3');
+com3=serial('COM8');
 % set(a,'BaudRate',9600); %设置波特率s
 %9号是信号线
 fopen(com3);%打开串口对象
 
 pause(3);
-disp(com3);
+% disp(com3);
 % disp('open com3');
-
 fprintf(com3,'1');
+
+disp('camera start')
 % Start the acquisition.
 start(vidobj)
+
+
 % idn = fscanf(a);
 % disp(idn);
 
 % fclose(a);
 %  delete(instrfind({'Port'},{'COM3'}));
-% % Start the acquisition.
-% start(vidobj)
+
 
 % Wait for data logging to end before retrieving data.  Set the wait time
 % to be equal to the expected time to acquire the number of frames
 % specified plus a little buffer time to accommodate  overhead.
 waittime = actualRate * (vidobj.FramesPerTrigger + vidobj.TriggerFrameDelay) + 5;
 wait(vidobj, waittime);
+disp('camera over')
 
 % Retrieve the data and timestamps.
 [frames, timeStamp] = getdata(vidobj);
@@ -88,7 +92,6 @@ fclose(com3);
 delete(instrfind({'Port'},{'COM3'}));
 % save('frames.mat','frames')
 
-
 %% 3D
 
 %% parameter initialization
@@ -119,7 +122,7 @@ data=frames;
 % qtest=qtest./cos(surfaceToSurfaceAngle);
 %% 3D reconstruction
 for ii=rotationAngle
-    rotAngle=ii;
+    rotAngle=ii/2;
 %     q=rand(480,1); %get distance
 %     frameNow=read(mov,rotAngle+189);
     frameNow=data(:,:,:,ii);        %-------------Ycbcr image
@@ -145,6 +148,7 @@ figure;mesh(posXall,posYall,posZall)
 xlabel('x')
 ylabel('y')
 zlabel('z')
+% axis([XMIN XMAX YMIN YMAX ZMIN ZMAX])  设置三维图的x-y-z坐标范围
 % figure;plot3(positionXall,positionYall,positionZall)
 % figure;scatter3(positionXall(:),positionYall(:),positionZall(:))
 
