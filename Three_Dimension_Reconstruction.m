@@ -89,7 +89,7 @@ percentError = (diffRates/actualRate) * 100;
 delete(vidobj)
 clear vidobj
 fclose(com3);
-delete(instrfind({'Port'},{'COM3'}));
+delete(instrfind({'Port'},{'COM8'}));
 % save('frames.mat','frames')
 
 %% 3D
@@ -122,7 +122,7 @@ data=frames;
 % qtest=qtest./cos(surfaceToSurfaceAngle);
 %% 3D reconstruction
 for ii=rotationAngle
-    rotAngle=ii/2;
+    rotAngle=ii;
 %     q=rand(480,1); %get distance
 %     frameNow=read(mov,rotAngle+189);
     frameNow=data(:,:,:,ii);        %-------------Ycbcr image
