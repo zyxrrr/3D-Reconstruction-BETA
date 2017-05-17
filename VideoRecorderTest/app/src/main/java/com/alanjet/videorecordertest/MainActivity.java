@@ -210,7 +210,7 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback {
                         // 这两项需要放在setOutputFormat之前m
                         mRecorder.setAudioSource(MediaRecorder.AudioSource.CAMCORDER);
                         mRecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
-                        mRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_720P ));
+                        mRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_HIGH ));
                         mRecorder.setVideoSize(640,480);
                         mRecorder.setVideoFrameRate(30);
                         mRecorder.setPreviewDisplay(mSurfaceHolder.getSurface());
