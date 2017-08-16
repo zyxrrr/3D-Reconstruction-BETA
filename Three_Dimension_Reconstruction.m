@@ -1,7 +1,7 @@
 clc;clear all;close all;
 %% camera data load
 % Access an image acquisition device.
-vidobj = videoinput('winvideo', 2, 'YUY2_640x480');
+vidobj = videoinput('winvideo', 1, 'YUY2_640x480');
 
 % Configure the number of frames to log.
 vidobj.FramesPerTrigger = 180;
@@ -14,7 +14,7 @@ vidobj.TriggerFrameDelay = 5;
 src = getselectedsource(vidobj);
 
 src.ExposureMode = 'manual';
-src.Exposure = -7;
+src.Exposure = -6;
 
 % Determine the device specific frame rates (frames per second) available.
 frameRates = set(src, 'FrameRate');
@@ -24,7 +24,7 @@ src.FrameRate = frameRates{1};
 actualRate = str2num( frameRates{1} )
 preview(vidobj);
 
-com3=serial('COM8');
+com3=serial('COM5');
 % set(a,'BaudRate',9600); %设置波特率s
 %9号是信号线
 fopen(com3);%打开串口对象
@@ -32,13 +32,13 @@ fopen(com3);%打开串口对象
 pause(3);
 % disp(com3);
 % disp('open com3');
-fprintf(com3,'1');
+
 
 disp('camera start')
 % Start the acquisition.
+
+fprintf(com3,'1');
 start(vidobj)
-
-
 % idn = fscanf(a);
 % disp(idn);
 
@@ -89,16 +89,21 @@ percentError = (diffRates/actualRate) * 100;
 delete(vidobj)
 clear vidobj
 fclose(com3);
-delete(instrfind({'Port'},{'COM8'}));
+delete(instrfind({'Port'},{'COM5'}));
 % save('frames.mat','frames')
 
 %% 3D
 
 %% parameter initialization
-sDis=0.2;                    %----------------------------20cm laser camera distance
+sDis=0.2254;                    %----------------------------20cm laser camera distance
+angle=1.461;             %----------------------------laser angle
+% sDis=0.2068 ;
+% angle = 1.492;
+sDis= 0.2217  ;
+angle = 1.464 ;
 sRotation=0.105;             %----------------------------laser rotation distance
 pixelSize=2.2e-6;            %----------------------------2.2um
-angle=82/180*pi;             %----------------------------laser angle
+
 % focal=0.001684349200525;
 load('fc.mat');
 focal=(fc(2))*pixelSize;
@@ -148,6 +153,8 @@ figure;mesh(posXall,posYall,posZall)
 xlabel('x')
 ylabel('y')
 zlabel('z')
+figure;plot3(posXall(:),posYall(:),posZall(:))
+
 % axis([XMIN XMAX YMIN YMAX ZMIN ZMAX])  设置三维图的x-y-z坐标范围
 % figure;plot3(positionXall,positionYall,positionZall)
 % figure;scatter3(positionXall(:),positionYall(:),positionZall(:))
