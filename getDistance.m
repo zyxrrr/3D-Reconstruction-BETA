@@ -1,6 +1,7 @@
 function [ output_args ] = getDistance( data )
-%UNTITLED2 Summary of this function goes here
-%   Detailed explanation goes here
+% input a image, output the distance
+% fc.mat is the camera focal length
+
 
 sDis=0.20;%20cm
 pixelSize=2.2e-6;%2.2um
