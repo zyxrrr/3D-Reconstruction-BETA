@@ -1,5 +1,6 @@
 # 3D Reconstruction
 
+| ---- | ---- |
 | Original obiect| /imgs/original_object.jpg|
 | Reconstruction result| /imgs/result.jpg|
 
