@@ -1,6 +1,6 @@
 function [ indes_output ] = getInd( image )
-%UNTITLED2 Summary of this function goes here
-%   Detailed explanation goes here
+%input a image, output the light position
+
     [m n]=size(image);
     indes_output=[];
     for ii=1:m
