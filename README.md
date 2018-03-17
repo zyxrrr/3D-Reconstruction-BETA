@@ -1,3 +1,3 @@
-3D Reconstruction
+# 3D Reconstruction APP
 
-only close range useful
+based on JNI, only close range useful
