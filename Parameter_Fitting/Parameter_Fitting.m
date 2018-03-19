@@ -13,5 +13,5 @@ q=focal.*s./x;
 % qtest=sort([q ; qActual],2);
 
 
-%% Focal Fiting
-focal_fitting=qActual.*(320-ind)*pixelSize./(s-qActual/tan(angle))
+%% Parameter Fiting
+% get angle and s
