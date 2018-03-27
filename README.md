@@ -7,4 +7,4 @@
 
 You can see the result by import [pos.txt](/pos.txt) in MeshLab.
 
-based on struct light,only close range useful
+Based on struct light,only close range useful
